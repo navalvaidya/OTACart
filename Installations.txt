@@ -11,7 +11,7 @@ Now cmd can be used to access python
 	pip install requests
 	
 	pip install nltk
-	type "python" in terminal and type "nltk.download()" and download the packages
+	type "python" in terminal and type "import nltk" and  "nltk.download()" and download the packages
 	
 7)go to "https://pypi.python.org/pypi/lxml/3.7.3" and download "lxml-3.7.3.win32-py3.4.exe (md5)"(according to python version)
 8)go to "https://pypi.python.org/pypi/PyYAML" and download "PyYAML-3.12.win32-py3.4.exe (md5)" (according to python version)
