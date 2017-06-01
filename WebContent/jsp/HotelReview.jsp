@@ -39,9 +39,9 @@
    					</div>
     				<div class="collapse navbar-collapse" id="myNavbar">
       					<ul class="nav navbar-nav">
-        					<li><a href="/OTACart1/jsp/index.jsp">Price</a></li>
-        					<li><a href="#">Tips</a></li>
-        					<li><a href="#">Reviews</a></li>
+        					<li><a href="/OTACart/jsp/index.jsp">Price</a></li>
+        					<li><a href="/OTACart/jsp/ReviewSearchPage.jsp">Reviews</a></li>
+        					
         			    </ul>
     				</div>
     			</div>

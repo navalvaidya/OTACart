@@ -62,12 +62,13 @@
        					</button>
        
        
-   						<a class="navbar-brand page-scroll" href="main.html">Revnomix</a>
+   						<a class="navbar-brand page-scroll" href="/OTACart/jsp/index.jsp">Revnomix</a>
    					</div>
     				<div class="collapse navbar-collapse" id="myNavbar">
       					<ul class="nav navbar-nav">
-        					<li><a href="#">Review</a></li>
-        					<li><a href="#">Influential people</a></li>
+        					<li><a href="/OTACart/jsp/index.jsp">Price</a></li>
+        					<li><a href="/OTACart/jsp/ReviewSearchPage.jsp">Reviews</a></li>
+        			
         			    </ul>
     				</div>
     			</div>

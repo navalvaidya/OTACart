@@ -44,13 +44,19 @@ def parse():
                     'reviews':reviews,
         }
         hotel_data.append(data)
-    url = parser.xpath('.//div[contains(@class,"unified pagination ")]')
+    #url = parser.xpath('.//div[contains(@class,"unified pagination ")]')
 
-    for i in url:
-        raw_nexturl = i.xpath('.//a[@class="nav next rndBtn ui_button primary taLnk"]/@href')
-        nexturl = 'http://www.tripadvisor.in'+raw_nexturl[0] if raw_nexturl else None    
+    #for i in url:
+    #    raw_nexturl = i.xpath('.//a[@class="nav next rndBtn ui_button primary taLnk"]/@href')
+    #    nexturl = 'http://www.tripadvisor.in'+raw_nexturl[0] if raw_nexturl else None    
 
-    for i in range(9):
+    url = sys.argv[1]
+    url = url+("#REVIEWS")
+    temp = url.split("Reviews-")
+    count = 5
+    nexturl = temp[0]+"Reviews-or"+str(count)+"-"+temp[1]
+
+    for i in range(10):
         headers = {
                             'Accept': 'text/javascript, text/html, application/xml, text/xml, */*',
                             'Accept-Encoding': 'gzip,deflate',
@@ -81,11 +87,13 @@ def parse():
                         'reviews':reviews,
             }
             hotel_data.append(data)
-        url = parser.xpath('.//div[contains(@class,"unified pagination ")]')
+        count = count+5
+        nexturl = temp[0]+"Reviews-or"+str(count)+"-"+temp[1]
 
-        for i in url:
-            raw_nexturl = i.xpath('.//a[@class="nav next rndBtn ui_button primary taLnk"]/@href')
-            nexturl = 'http://www.tripadvisor.in'+raw_nexturl[0] if raw_nexturl else None       
+        #url = parser.xpath('.//div[contains(@class,"unified pagination ")]')
+        #for i in url:
+        #    raw_nexturl = i.xpath('.//a[@class="nav next rndBtn ui_button primary taLnk"]/@href')
+        #    nexturl = 'http://www.tripadvisor.in'+raw_nexturl[0] if raw_nexturl else None       
     return hotel_data
 
 

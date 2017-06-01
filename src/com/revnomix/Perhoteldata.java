@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -72,6 +74,7 @@ public class Perhoteldata extends HttpServlet {
         String report[] = new String[40];
           
         Float parr[];
+        String oarr[];
         // assigning filename
         for(int i=0 ; i<30 ; i++){
         	filename[i] = new String();
@@ -81,67 +84,91 @@ public class Perhoteldata extends HttpServlet {
         ArrayList<String> perdate = new ArrayList<String>();
         for(int i =0 ;i<30 ;i++){
     		List<Float> pricearr = new ArrayList<Float>();
-    		ArrayList<Float> duplicates = new ArrayList<Float>();
-    		Boolean dupFound = false;
+//    		new
+    		List<String> otaarr = new ArrayList<String>();
+    		HashMap<String,Float> hm=new HashMap<String,Float>();
+    		
+//    		ArrayList<Float> duplicates = new ArrayList<Float>();
+//    		Boolean dupFound = false;
     		report[i]= new String();
     		String path = this.getServletContext().getRealPath("/WEB-INF/DataFiles/"+filename[i]);
     		report[i] = search(path);
     		StringBuffer s = new StringBuffer();
     		String[] r= report[i].split("\\s+");
-    		String[] r1= report[i].split("\\s+");
+//    		String[] r1= report[i].split("\\s+");
 
     		for(int j=0 ; j<r.length ; j++){
     			if(isInteger(r[j])==true){
     				float a = Float.parseFloat(r[j]);
     				//System.out.println("\nINTEGER "+a);
     				pricearr.add(a);
-    			}   			
+    			}  
+    			else{
+    				//new
+    				otaarr.add(r[j]);
+    			}    			    			
     		}
     		
     		//System.out.println("\n\nOUTPUT "+ s+"\n");
     		//System.out.println("DULICATE ARRAY VALUES ");
-
+    		oarr = otaarr.toArray(new String[otaarr.size()]);
     		parr = pricearr.toArray(new Float[pricearr.size()]);
-	
-    		for (int k = 0; k < parr.length; k++) { 
-    			for (int z = k + 1 ; z < parr.length; z++) { 
-    				if (parr[k].equals(parr[z]) ){ 
-    					//System.out.println(parr[z]+" ");
-    					duplicates.add(parr[z]);
-    					dupFound = true;
-   					} 
-   				} 
-    		}
-    		if(dupFound.equals(false)){
-    			float no = 0;
-    			duplicates.add(no);
-    		}
-    		//////////////////duplicte found                		
-    		for(int j=0 ; j<r1.length ; j++){
-    			if(isInteger(r1[j])==true){
-    				float a = Float.parseFloat(r1[j]);
-    				if(a== duplicates.get(0)){
-	    				 s.append(r1[j]);
-	    				 s.append("(S)");
-	    				 s.append(" \n");
-    				}
-    				else{
-    					 s.append(r1[j]);
-    					 s.append("(N)");
-        				 s.append(" \n");
-    				}
-    			}
-    			else{
-    				s.append(r[j]);
-    				s.append(" ");
-    			}    			
-    		}
-    		//System.out.println("ARRAY");	
-
-    		for(int l=0 ;l< pricearr.size(); l++){
-    			//System.out.println("\t"+parr[l]);
-    		}
     		
+    		for(int h =0 ;h<parr.length ; h++){
+    			hm.put(oarr[h], parr[h]);
+    		}
+    		System.out.println("Hashmap output");
+    		
+    		 for(Map.Entry m:hm.entrySet()){
+    			   System.out.println(m.getKey()+" "+m.getValue());
+    			  }
+     		List<Float> newpricearr = new ArrayList<Float>();
+    		List<String> newotaarr = new ArrayList<String>();
+
+
+     		for(Map.Entry m:hm.entrySet()){
+ 			        newpricearr.add((Float) m.getValue());
+ 			  }
+     		for(Map.Entry m:hm.entrySet()){
+			        newotaarr.add((String) m.getKey());
+			  }
+     		
+    		 Float newparr[] = newpricearr.toArray(new Float[newpricearr.size()]);
+    		 String newoarr[] = newotaarr.toArray(new String[newotaarr.size()]);
+
+    		 
+    	
+    		 float newdup =0;
+    		 
+    		 ///////////////////new end
+	
+    		 for (int k = 0; k < newparr.length; k++){ 
+     			for (int z = k + 1 ; z < newparr.length; z++){ 
+     				if (newparr[k].equals(newparr[z]) ){ 
+     					//new
+     					newdup = newparr[z];//
+    					} 
+    				} 
+     		}
+     		
+     		//new
+     		for(int j=0 ; j<newparr.length ; j++){
+     			if(newparr[j] == newdup ){
+     				s.append(newoarr[j]);
+     				s.append(" ");
+     				s.append(newparr[j]);
+     				s.append("(S)");
+     				s.append(" \n");
+     			}
+     			else{
+     				s.append(newoarr[j]);
+     				s.append(" ");
+     				s.append(newparr[j]);
+     				s.append("(N)");
+     				s.append(" \n");
+     			}
+     		}
+     	// new end
     		String ss = s.toString();
     		perdate.add(i, ss);
     	}

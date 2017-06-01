@@ -16,6 +16,8 @@ browser = webdriver.Chrome()
 browser.get(url)
 checkindate = datetime.datetime.now()
 checkoutdate = datetime.datetime.now()+datetime.timedelta(days=1)
+checkindate = checkindate + datetime.timedelta(days=14)
+checkoutdate = checkoutdate + datetime.timedelta(days=14)
 for i in range(30):
 	hotel_data = []
 	checkindate = checkindate + datetime.timedelta(days=1)
@@ -25,7 +27,7 @@ for i in range(30):
 	indate = str(checkindate.year)+"-"+str(checkindate.month)+"-"+str(checkindate.day)
 	outdate = str(checkoutdate.year)+"-"+str(checkoutdate.month)+"-"+str(checkoutdate.day)
 
-	WebDriverWait(browser,10).until(EC.presence_of_element_located((By.XPATH,"//*[@id='meta_date_selector']/fieldset/div[2]/div[1]/span[1]/span/span[2]"))).click()
+	WebDriverWait(browser,10).until(EC.presence_of_element_located((By.XPATH,"//span[@data-datetype='CHECKIN']/span[@class='picker-inner']/span[@class='picker-label']"))).click()
 	WebDriverWait(browser,10).until(EC.presence_of_element_located((By.XPATH,"//span[@class='dsdc-month']/span[@data-date='"+checkin+"']"))).click()
 	WebDriverWait(browser,10).until(EC.presence_of_element_located((By.XPATH,"//span[@class='dsdc-month']/span[@data-date='"+checkout+"']"))).click()   
 	time.sleep(2)
@@ -35,7 +37,7 @@ for i in range(30):
 		browser.switch_to_window(browser.window_handles[0])
 
 	
-	mainPrice = browser.find_elements_by_xpath("//*[@id='taplc_hr_meta_block_offerclick_0']/div/div/div/div/div")
+	mainPrice = browser.find_elements_by_xpath("//*[@id='taplc_hr_north_star_v1_meta_0']/div[2]/div/div/div")
 	for main in mainPrice:
 		attempts=0
 		while attempts<2:
@@ -55,7 +57,7 @@ for i in range(30):
 			]
 			hotel_data.append(data)
 
-	mainPrice1 = browser.find_elements_by_xpath("//*[@id='taplc_hr_meta_block_offerclick_0']/div/div/div/div")
+	mainPrice1 = browser.find_elements_by_xpath("//*[@id='taplc_hr_north_star_v1_meta_0']/div[2]/div/div/div[4]/div/div")
 	for main1 in mainPrice1:
 		attempts=0
 		while attempts<2:
